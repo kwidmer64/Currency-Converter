@@ -9,13 +9,15 @@ var requestOptions = {
 //Conversion
 
 let currency = {
-    convertCurrency: function (currency_from, currency_to){
+    convertCurrency: function (currency_from, currency_to, amount){
+      // conversion retrieval
         fetch(
             "https://api.apilayer.com/exchangerates_data/convert?to="
             + currency_to 
             + "&from=" 
             + currency_from 
-            + "&amount=1", 
+            + "&amount="
+            + amount, 
             requestOptions)
           .then(async function(response){
             var json = await response.json();
@@ -25,11 +27,13 @@ let currency = {
           .then(result => this.displayConversion(result))
           .catch(error => console.log('error', error));
     },
+    // display conversion results
     displayConversion: function(result) {
         const currencyFrom = result.query.from;
         const currencyTo = result.query.to;
+        const amount = result.query.amount;
         //console.log(currencyFrom, currencyTo, result.result);
-        document.querySelector(".currency-from").innerText = "1 " + currencyFrom + " equals";
+        document.querySelector(".currency-from").innerText = amount + " " + currencyFrom + " equals";
         document.querySelector(".currency-to").innerText = result.result + " " + currencyTo;
     }
 };
@@ -87,7 +91,11 @@ document
     var selectTo = document.getElementById('convert-to');
     var valueTo = selectTo.options[selectTo.selectedIndex].value;
 
-    currency.convertCurrency(valueFrom, valueTo);
+    //get conversion amount
+    var conversionAmount = document.getElementById('convert-input').value;
+
+
+    currency.convertCurrency(valueFrom, valueTo, conversionAmount);
   });
 
 window.onload = (event) => {
