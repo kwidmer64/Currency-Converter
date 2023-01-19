@@ -28,7 +28,7 @@ body {
 }
 
 
-button {
+.search {
   margin: 0.5em;
   border-radius: 50%;
   border: none;
@@ -39,6 +39,7 @@ button {
   color: white;
   cursor: pointer;
   transition: 0.2s ease-in-out;
+  flex: none;
 }
 
 #convert-from,
@@ -76,4 +77,18 @@ h1.currency-to {
 
 .currency {
   margin-left: 2.1% !important;
+}
+
+@media screen and (max-width: 47em) {
+  .inputs {
+    flex-direction: column;
+  }
+  #convert-from,
+  #convert-to {
+    width: 100%;
+  }
+
+  #convert-input {
+    width: 93.3%;
+  }
 }
