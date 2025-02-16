@@ -1,5 +1,5 @@
 # [Currency Converter](https://kwidmer-currency-converter.netlify.app/)
-## by nokompass
+## by Korben
 
 ### About the project:
 
